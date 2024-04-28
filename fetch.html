@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ROS Data Viewer</title>
+    <script>
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/data', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    document.getElementById('data').innerText = data.ros_data;
+                } else {
+                    console.error('Error fetching data');
+                }
+            };
+            xhr.send();
+        }
+        setInterval(fetchData, 500); // Fetch data every 1 second
+    </script>
+</head>
+<body>
+    <h1>ROS Topic Data</h1>
+    <p id="data">Loading...</p>
+</body>
+</html>
